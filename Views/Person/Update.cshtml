@@ -1,0 +1,72 @@
+@using ASM_Day7.Enum;
+@model ASM_Day7.Models.PersonModel;
+@{
+    ViewData["Title"] = "Update Person";
+}
+<div>
+    <h1 class="display-4 text-center">Add New Member</h1>
+
+    <form asp-action="Update">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @Html.HiddenFor(modelItem => @Model.Id)
+        <div class="form-group">
+            <label for="firstName" class="control-lable">First Name: </label>
+            <input type="text" class="form-control" id="firstName" name="firstName" value="@Model.FirstName">
+            @Html.ValidationMessageFor(m => m.FirstName,"", new {@class="text-danger"})
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name: </label>
+            <input type="text" class="form-control" id="lastName" name="lastName" value="@Model.LastName">
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender: </label>
+            <select class="form-control" name="gender" id="gender">
+                <option value="Other" selected="@Model.Gender == @Gender.Other">Other</option>
+                <option value="Male" selected="@Model.Gender == @Gender.Other">Male</option>
+                <option value="Female" selected="@Model.Gender == @Gender.Other">Female</option>
+            </select>
+            @Html.ValidationMessageFor(m => m.Gender,"", new {@class="text-danger"})
+        </div>
+
+        @{
+            var pattern = "yyyy-MM-dd";
+        }
+        <div class="form-group">
+            <label for="dateOfBirth">Date Of Birth </label>
+            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                value="@Model.DateOfBirth.ToString(@pattern)" />
+            @Html.ValidationMessageFor(m => m.DateOfBirth,"", new {@class="text-danger"})
+        </div>
+
+        <div class="form-group">
+            <label for="phoneNum">Phone Number: </label>
+            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}"
+                value="@Model.PhoneNumber" />
+            @Html.ValidationMessageFor(m => m.PhoneNumber,"", new {@class="text-danger"})
+        </div>
+
+        <div class="form-group">
+            <label for="birthPlace">Birth Place: </label>
+            <input type="text" class="form-control" id="birthPlace" name="birthPlace" value="@Model.BirthPlace" />
+            @Html.ValidationMessageFor(m => m.BirthPlace,"", new {@class="text-danger"})
+        </div>
+
+        <div class="form-group">
+            <label>Have you graduated? </label>
+            <div class="form-check">
+                <input type="radio" id="yes" name="isGraduated" value="true" checked="@Model.IsGraduated" />
+                <label for="yes">Yes</label>
+                <input type="radio" id="no" name="isGraduated" value="false" checked="@Model.IsGraduated" />
+                <label for="no">No</label>
+            </div>
+            <@Html.ValidationMessageFor(m => m.IsGraduated,"", new {@class="text-danger"}) </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <p>
+        <a asp-controller="Person" asp-action="Index">Return to list</a>
+    </p>
+</div>

@@ -1,0 +1,17 @@
+@model ASM_Day7.Models.PersonModel;
+@{
+    ViewData["Title"] = "Delete person";
+    String message = ViewBag.name;
+}
+
+<h2>Delete Conformation</h2>
+
+<h3>Person @Model.FullName was removed successfully!!!</h3>
+
+<script>
+    sessionStorage.setItem("name", @Model.FullName);
+</script>
+
+<p>
+    <a asp-controller="Person" asp-action="Index">Return to list</a>
+</p>

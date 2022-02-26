@@ -1,0 +1,34 @@
+@model ASM_Day7.Models.PersonModel;
+@{
+    ViewData["Title"] = "Person infor";
+}
+<div>
+    <h1>Person Details</h1>
+
+    @Html.HiddenFor(modelItem => @Model.Id)
+    <div>Name: @Model.FirstName @Model.LastName</div>
+
+    <div>Gender: @Model.Gender.ToString()</div>
+
+    @{
+        var pattern = "yyyy-MM-dd";
+    }
+
+    <div>Date of birth: @Model.DateOfBirth.ToString(@pattern)</div>
+
+    <div>Birth place: @Model.BirthPlace</div>
+
+    <div>Phone number: @Model.PhoneNumber</div>
+
+    <div>Graduated: @Model.IsGraduated.ToString()</div>
+
+    @using (Html.BeginForm("Delete", "Person", FormMethod.Post, new { @id = "Delete" }))
+    {
+        @Html.HiddenFor(Model => Model.Id)
+        <button type="submit" value="@Model.Id" class="btn btn-primary btn-danger">Delete</button>
+    }
+
+    <p>
+        <a asp-controller="Person" asp-action="Index">Return to list</a>
+    </p>
+</div>
